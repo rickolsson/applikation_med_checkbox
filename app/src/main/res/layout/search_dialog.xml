@@ -14,7 +14,8 @@
         android:fontFamily="sans-serif-light"
         android:hint="@string/name_of_product"
         android:importantForAutofill="no"
-        android:inputType="text" />
+        android:inputType="text"
+        android:textColorLink="#0B7B3E" />
 
     <EditText
         android:id="@+id/product_type"
@@ -27,7 +28,8 @@
         android:fontFamily="sans-serif-light"
         android:hint="product_type"
         android:importantForAutofill="no"
-        android:inputType="text" />
+        android:inputType="text"
+        android:textColorLink="#0B7B3E" />
 
     <EditText
         android:id="@+id/min_alco_input"
@@ -40,7 +42,8 @@
         android:fontFamily="sans-serif-light"
         android:hint="minimum alcohol, eg 4.0"
         android:importantForAutofill="no"
-        android:inputType="numberDecimal" />
+        android:inputType="numberDecimal"
+        android:textColorLink="#0B7B3E" />
 
     <EditText
         android:id="@+id/max_alco_input"
@@ -53,7 +56,8 @@
         android:fontFamily="sans-serif-light"
         android:hint="maximum alcohol, e g 5.0"
         android:importantForAutofill="no"
-        android:inputType="numberDecimal" />
+        android:inputType="numberDecimal"
+        android:textColorLink="#0B7B3E" />
 
     <EditText
         android:id="@+id/min_price_input"
@@ -66,7 +70,8 @@
         android:fontFamily="sans-serif-light"
         android:hint="minimum price, e g 12"
         android:importantForAutofill="no"
-        android:inputType="numberDecimal" />
+        android:inputType="numberDecimal"
+        android:textColorLink="#0B7B3E" />
 
     <EditText
         android:id="@+id/max_price_input"
@@ -78,5 +83,6 @@
         android:layout_marginBottom="4dp"
         android:fontFamily="sans-serif-light"
         android:hint="@string/maximum_price_e_g_19"
-        android:inputType="numberDecimal" />
+        android:inputType="numberDecimal"
+        android:textColorLink="#0B7B3E" />
 </LinearLayout>
