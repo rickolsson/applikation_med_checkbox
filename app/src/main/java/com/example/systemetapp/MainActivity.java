@@ -44,14 +44,14 @@ public class MainActivity extends AppCompatActivity {
         products = new ArrayList<>();
         Product p1 = new Product.Builder()
                 .alcohol(4.4)
-                .name("Pilsner Urquell")
+                .name("Use the search function..")
                 .nr(1234)
                 .productGroup("Öl")
                 .type("Öl")
                 .volume(330).build();
         Product p2 = new Product.Builder()
                 .alcohol(4.4)
-                .name("Baron Trenk")
+                .name("")
                 .nr(1234)
                 .productGroup("Öl")
                 .type("Öl")
