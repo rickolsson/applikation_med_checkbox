@@ -6,6 +6,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -15,6 +16,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -33,12 +36,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static android.view.MenuItem.*;
+
 public class MainActivity extends AppCompatActivity {
 
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
     private ListView listView;
     private ArrayAdapter<Product> adapter;
     private List<Product> products;
+    private android.support.v7.view.ActionMode mActionmode;
 
     private void createFakedProducts() {
         products = new ArrayList<>();
@@ -90,8 +96,59 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         createFakedProducts();
         setupListView();
+        ListView textView = findViewById(R.id.product_list);
+        textView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                if (mActionmode != null){
+                    return false;
+                }
 
-    }
+                mActionmode = startSupportActionMode(mActionModeCallback);
+                return true;
+
+            }
+            private android.support.v7.view.ActionMode.Callback mActionModeCallback = new android.support.v7.view.ActionMode.Callback() {
+                    @Override
+                    public boolean onCreateActionMode(android.support.v7.view.ActionMode actionMode, Menu menu) {
+                        actionMode.getMenuInflater().inflate(R.menu.contextual_menu, menu);
+                        actionMode.setTitle("Choose your options ");
+
+                        return true;
+                    }
+
+                    @Override
+                    public boolean onPrepareActionMode(android.support.v7.view.ActionMode actionMode, Menu menu) {
+                        return false;
+                    }
+
+                    @Override
+                    public boolean onActionItemClicked(android.support.v7.view.ActionMode actionMode, MenuItem menuItem) {
+                        switch (menuItem.getItemId()) {
+                            case R.id.option_1:
+                                Toast.makeText(MainActivity.this, "option 1 selected", Toast.LENGTH_SHORT).show();
+                                actionMode.finish();
+                                return true;
+                            case R.id.option_2:
+                                Toast.makeText(MainActivity.this, "option 2 selected", Toast.LENGTH_SHORT).show();
+                                actionMode.finish();
+                                return true;
+
+                            default:
+                                return false;
+                        }
+                    }
+
+                    @Override
+                    public void onDestroyActionMode(android.support.v7.view.ActionMode actionMode) {
+                        mActionmode = null;
+                    }
+
+
+                };
+            });
+        }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
