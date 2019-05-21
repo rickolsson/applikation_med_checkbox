@@ -12,8 +12,10 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -45,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
     private ArrayAdapter<Product> adapter;
     private List<Product> products;
     private android.support.v7.view.ActionMode mActionmode;
+    public static boolean isActionMode = false;
 
     private void createFakedProducts() {
         products = new ArrayList<>();
@@ -96,58 +99,46 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         createFakedProducts();
         setupListView();
-        ListView textView = findViewById(R.id.product_list);
-        textView.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                if (mActionmode != null){
-                    return false;
-                }
+        listView.setChoiceMode(AbsListView.CHOICE_MODE_MULTIPLE_MODAL);
+        listView.setMultiChoiceModeListener(modeListener);
+        CheckBox checkbox = findViewById(R.id.checkBox2);
 
-                mActionmode = startSupportActionMode(mActionModeCallback);
-                return true;
+    }
+
+
+        AbsListView.MultiChoiceModeListener modeListener = new AbsListView.MultiChoiceModeListener() {
+            @Override
+            public void onItemCheckedStateChanged(ActionMode mode, int position, long id, boolean checked) {
 
             }
-            private android.support.v7.view.ActionMode.Callback mActionModeCallback = new android.support.v7.view.ActionMode.Callback() {
-                    @Override
-                    public boolean onCreateActionMode(android.support.v7.view.ActionMode actionMode, Menu menu) {
-                        actionMode.getMenuInflater().inflate(R.menu.contextual_menu, menu);
-                        actionMode.setTitle("Choose your options ");
 
-                        return true;
-                    }
-
-                    @Override
-                    public boolean onPrepareActionMode(android.support.v7.view.ActionMode actionMode, Menu menu) {
-                        return false;
-                    }
-
-                    @Override
-                    public boolean onActionItemClicked(android.support.v7.view.ActionMode actionMode, MenuItem menuItem) {
-                        switch (menuItem.getItemId()) {
-                            case R.id.option_1:
-                                Toast.makeText(MainActivity.this, "option 1 selected", Toast.LENGTH_SHORT).show();
-                                actionMode.finish();
-                                return true;
-                            case R.id.option_2:
-                                Toast.makeText(MainActivity.this, "option 2 selected", Toast.LENGTH_SHORT).show();
-                                actionMode.finish();
-                                return true;
-
-                            default:
-                                return false;
-                        }
-                    }
-
-                    @Override
-                    public void onDestroyActionMode(android.support.v7.view.ActionMode actionMode) {
-                        mActionmode = null;
-                    }
+            @Override
+            public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+                MenuInflater inflater = mode.getMenuInflater();
+                inflater.inflate(R.menu.menu_contextual,menu);
+                isActionMode = true;
 
 
-                };
-            });
-        }
+                return true;
+            }
+
+            @Override
+            public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+                return false;
+            }
+
+            @Override
+            public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+                return false;
+            }
+
+            @Override
+            public void onDestroyActionMode(ActionMode mode) {
+            isActionMode = false;
+            }
+        };
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
