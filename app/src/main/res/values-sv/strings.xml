@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Systembolaget</string>
+    <string name="maximum_alcohol_e_g_5.0">maximal alkoholhalt, t.ex 5.0</string>
+    <string name="maximum_price_e_g_19">maximalt pris, t.ex 19</string>
+    <string name="minimum_alcohol_e_g_4.0">minimum alkoholhalt, t.ex 4.0</string>
+    <string name="minimum_price_e_g_12">minimum pris, t.ex 12</string>
+    <string name="name_of_product">namn på produkt</string>
+    <string name="product_type">produkttyp</string>
+    <string name="age_check">"Bekräfta att du är över 20 år "</string>
+    <string name="next">Nästa</string>
+    <string name="search">Sök</string>
+</resources>
